@@ -5,15 +5,27 @@ services:
     restart: "always"
     networks:
       - "reverse-proxy"
-    ports:
-      - "8096:8096"
+    expose:
+      - "8096"
     volumes:
       - "./config:/config"
       - "./cache:/cache"
       - "media:/media"
     labels:
+      - "traefik.enable=true"
+      - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.home.tastic`)"
       - "diun.enable=true"
       - "diun.include_tags=^10\\.\\d+\\.\\d+$"
+      - "homepage.group=Media & Entertainment"
+      - "homepage.name=Jellyfin"
+      - "homepage.icon=jellyfin.png"
+      - "homepage.href=https://jellyfin.home.tastic"
+      - "homepage.description=Media Streaming"
+      - "homepage.widget.type=jellyfin"
+      - "homepage.widget.url=https://jellyfin.home.tastic"
+      - "homepage.widget.key=${JELLYFIN_API_KEY}"
+      - "homepage.widget.enableBlocks=true"
+      - "homepage.widget.enableNowPlaying=false"
 
 volumes:
   media:
