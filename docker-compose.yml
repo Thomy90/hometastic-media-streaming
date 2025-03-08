@@ -1,0 +1,28 @@
+services:
+  jellyfin:
+    image: "${IMAGE}"
+    container_name: "jellyfin"
+    restart: "always"
+    networks:
+      - "reverse-proxy"
+    ports:
+      - "8096:8096"
+    volumes:
+      - "./config:/config"
+      - "./cache:/cache"
+      - "media:/media"
+    labels:
+      - "diun.enable=true"
+      - "diun.include_tags=^10\\.\\d+\\.\\d+$"
+
+volumes:
+  media:
+    driver_opts:
+      type: cifs
+      o: "noserverino,username=${MEDIA_USERNAME},password=${MEDIA_PASSWORD},iocharset=utf8"
+      device: "//${MEDIA_NAS}/${SHARE_NAME}"
+
+networks:
+  reverse-proxy:
+    external: true
+
