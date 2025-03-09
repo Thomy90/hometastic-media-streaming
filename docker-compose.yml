@@ -13,6 +13,7 @@ services:
       - "media:/media"
     labels:
       - "traefik.enable=true"
+      - "traefik.http.routers.jellyfin.entrypoints=web, websecure"
       - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.home.tastic`)"
       - "diun.enable=true"
       - "diun.include_tags=^10\\.\\d+\\.\\d+$"
