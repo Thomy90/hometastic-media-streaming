@@ -16,7 +16,7 @@ services:
       - "traefik.http.routers.jellyfin.entrypoints=web, websecure"
       - "traefik.http.routers.jellyfin.rule=Host(`jellyfin.home.tastic`)"
       - "diun.enable=true"
-      - "diun.include_tags=^10\\.\\d+\\.\\d+$"
+      - "diun.include_tags=^10\\.11\\.\\d+$"
       - "homepage.group=Media & Entertainment"
       - "homepage.name=Jellyfin"
       - "homepage.icon=jellyfin.png"
